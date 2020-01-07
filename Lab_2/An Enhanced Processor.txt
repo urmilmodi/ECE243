@@ -1,0 +1,5 @@
+This exercise is due the week of Feb. 3, in your assigned Practical Session. Teaching Assistants will be provided in your lab session to record your progress and to help you with issues.
+
+Do not procrastinate. This lab exercise will take a fair amount of time and effort to complete.
+
+The description of the exercise is given below, along with some design files that are provided for your use. You will need to unzip the design files and store them on your computer. 
