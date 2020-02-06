@@ -242,6 +242,7 @@ simulation/
 *dump.txt
 *.exe.stackdump
 *.sdc
+!*DE1_SoC.qsf*
 *
 
 # Random
