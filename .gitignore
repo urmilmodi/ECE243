@@ -241,6 +241,7 @@ simulation/
 *.v.bak
 *dump.txt
 *.exe.stackdump
+*.sdc
 *
 
 # Random
