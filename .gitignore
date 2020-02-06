@@ -240,6 +240,8 @@ simulation/
 *.qws
 *.v.bak
 *dump.txt
+*.exe.stackdump
+*
 
 # Random
 *.ini

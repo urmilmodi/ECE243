@@ -96,12 +96,19 @@ module proc(DIN, Resetn, Clock, Run, DOUT, ADDR, W);
                     end
                     mvt: begin
                         // ... your code goes here
+			Sel = Sel_D8;
+			Rin = Xreg;
+			Done = 1'b1;
                     end
                     add, sub, and_: begin
                         // ... your code goes here
+			Sel = rX;
+			Ain = 1'b1;
                     end
                     ld, st: begin
                         // ... your code goes here
+			Sel = rY;
+			ADDRin = 1'b1;
                     end
                     default: ;
                 endcase
@@ -109,17 +116,31 @@ module proc(DIN, Resetn, Clock, Run, DOUT, ADDR, W);
                 case (III)
                     add: begin
                         // ... your code goes here
+			if (!IMM) Sel = rY; 
+			else Sel = Sel_D; 
+			Gin = 1'b1;
                     end
                     sub: begin
                         // ... your code goes here
+			if (!IMM) Sel = rY; 
+			else Sel = Sel_D; 
+			AddSub = 1'b1;
+			Gin = 1'b1;
                     end
                     and_: begin
                         // ... your code goes here
+			if (!IMM) Sel = rY; 
+			else Sel = Sel_D; 
+			ALUand = 1'b1;
+			Gin = 1'b1;
                     end
                     ld: // wait cycle for synchronous memory
                         ;
                     st: begin
                         // ... your code goes here
+			Sel = rX;
+			DOUTin = 1'b1;
+			W_D = 1'b1;
                     end
                     default: ; 
                 endcase
@@ -127,12 +148,19 @@ module proc(DIN, Resetn, Clock, Run, DOUT, ADDR, W);
                 case (III)
                     add, sub, and_: begin
                         // ... your code goes here
+			Sel = Sel_G;
+			Rin = Xreg;
+			Done = 1'b1;
                     end
                     ld: begin
                         // ... your code goes here
+			Sel = DIN;
+			Rin = Xreg;
+			Done = 1'b1;
                     end
                     st: // wait cycle for synhronous memory
                         // ... your code goes here
+			Done = 1'b1;
                     default: ;
                 endcase
             default: ;
