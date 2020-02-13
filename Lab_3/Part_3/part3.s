@@ -9,7 +9,7 @@ _start:
             MOV     R2, #0
             MOV     R3, #0
             BL      LARGE           
-            MOV     R4, R2        // R0 holds the subroutine return value
+            MOV     R4, R0        // R0 holds the subroutine return value
 
 END:        B       END             
 
@@ -26,8 +26,8 @@ LARGE:    SUBS     R0, #1        // decrement the loop counter
          BGE      LARGE
          MOV      R2, R3        // update the largest number
          B        LARGE
-DONE:    STR      R2, [R0]      // store largest number into result location
-         BX       LR
+DONE:    MOV      R0, R2      // store largest number into result location
+         MOV      PC, LR
          
 
 RESULT:     .word   0           

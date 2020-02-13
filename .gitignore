@@ -243,7 +243,9 @@ simulation/
 *.exe.stackdump
 *.sdc
 !*DE1_SoC.qsf*
-*
+
+# Assembly
+
 
 # Random
 *.ini

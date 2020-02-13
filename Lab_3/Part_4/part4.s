@@ -6,7 +6,7 @@ _start:
             MOV    R5, #Digits  // R5 points to the decimal digits storage location
             LDR    R4, [R4]     // R4 holds N
             MOV    R0, R4       // parameter for DIVIDE goes in R0
-            MOV    R1, #Divisor
+            MOV    R1, #10
             BL     DIVIDE
             STRB   R1, [R5, #1] // Tens digit is now in R1
             STRB   R0, [R5]     // Ones digit is in R0
