@@ -234,6 +234,7 @@ db/
 incremental_db/
 output_files/
 simulation/
+greybox_tmp/
 *.cdf
 *.rpt
 *.qsf.bak
@@ -242,10 +243,18 @@ simulation/
 *dump.txt
 *.exe.stackdump
 *.sdc
+*.sld
+*.jdi
+*.smsg
+*.summary
+*.done
+*.pin
 !*DE1_SoC.qsf*
 
 # Assembly
+*.axf
+*.objdump
+*.srec
 
 # Random
-*
 *.ini
