@@ -45,7 +45,7 @@ RUNLOOP:    LDR   R3, [R2]   // R3 will have the value of the Keys
             BL    DO_DELAY
             B     RUNLOOP
             
-DO_DELAY:  LDR   R7, =50000000// delay counter
+DO_DELAY:  LDR   R7, =2000000// delay counter
            MOV   R9, #CONTROL
            LDR   R9, [R9]
            MOV   R0, #0b0
@@ -69,9 +69,15 @@ INCREMENT:  CMP     R5, #99
             ADDNE   R5, R5, #0b1
             MOVEQ   R5, #0
             PUSH    {LR}
+            BLEQ    OTHER  
             BL      DISPLAY
             POP     {LR}
             MOV     PC, LR
+
+OTHER:      CMP    R11, #59
+            ADDNE  R11, #0b1
+            MOVEQ  R11, #0
+            MOV    PC,  LR
 
 DIVIDE:     MOV    R2, #0
 CONT:       CMP    R0, #10
@@ -110,6 +116,25 @@ DISPLAY:    LDR     R8, =0xFF200020 // base address of HEX3-HEX0
             BL      SEG7_CODE       
             POP     {R1, LR}       
             LSL     R0, #8
+            ORR     R4, R0
+
+            MOV     R0, R11
+            PUSH    {R2, LR}
+            BL      DIVIDE          // ones digit will be in R0; tens
+                                    // digit in R1
+            POP     {R2, LR}
+            
+            PUSH    {R1, LR}
+            BL      SEG7_CODE       
+            POP     {R1, LR}              
+            LSL     R0, #16
+            ORR     R4, R0          // save bit code
+            MOV     R0, R1          // retrieve the tens digit, get bit
+                                    // code
+            PUSH    {R1, LR}
+            BL      SEG7_CODE       
+            POP     {R1, LR}       
+            LSL     R0, #24
             ORR     R4, R0
             
             
